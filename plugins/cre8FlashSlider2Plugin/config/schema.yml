@@ -1,0 +1,21 @@
+connection:           propel
+defaultIdMethod:      native
+package:              plugins.cre8FlashSlider2Plugin.lib.model
+
+classes:
+
+  Cre8FlashSlider2:
+    columns:
+      id:           ~
+      name:         { type: varchar(60), required: true }
+      filename:     { type: varchar(128), required: true }
+      timer:        { type: integer, required: true, default: 4 }
+      url:          { type: varchar(255) }
+      rank:         { type: integer, default: 10 }
+      text_content: { type: longvarchar }
+      text_width:   { type: integer, required: true, default: 240 }
+      text_x_pos:   { type: integer, required: true, default: 40 }
+      text_y_pos:   { type: integer, required: true, default: 70 }
+      bg_alpha:     { type: integer, required: true, default: 0 }
+      bg_colour:    { type: varchar(8), required: true, default: '0x000000' }
+  

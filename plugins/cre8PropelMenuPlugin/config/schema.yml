@@ -1,0 +1,74 @@
+connection:           propel
+defaultIdMethod:      native
+package:              plugins.cre8PropelMenuPlugin.lib.model
+
+classes:
+
+  cre8MenuType:
+    columns:
+      id:                    ~
+      name:                  { type: varchar(40), required: true, primaryString: true }
+
+  cre8ContentType:
+    columns:
+      id:                    ~
+      name:                  { type: varchar(40), required: true, primaryString: true }
+
+  cre8MenuContent:
+    propel_behaviors:
+      soft_delete:           ~
+      sluggable:
+        slug_pattern:        '{Name}'
+      sortable:
+        use_scope:           true
+        scope_column:        cre8_menu_type_id
+    columns:
+      id:         ~
+      cre8_menu_type_id:     { type: integer, required: true, foreignClass: cre8MenuType, foreignReference: id, onUpdate: cascade, onDelete: cascade }
+      name:                  { type: varchar(40), required: true, primaryString: true }
+      cre8_content_type_id:  { type: integer, required: true, foreignClass: cre8ContentType, foreignReference: id, onUpdate: cascade, onDelete: cascade }
+      meta_title:            { type: varchar(70) }
+      meta_description:      { type: longvarchar }
+      meta_keywords:         { type: longvarchar }
+      template:              { type: varchar(40) }
+      module:                { type: varchar(40) }
+      is_active:             { type: boolean, default: 1 }
+      is_hidden:             { type: boolean, default: 0 }
+
+  cre8MenuContentTypeFlash:
+    columns:
+      id:         ~
+      cre8_menu_content_id: { type: integer, required: true, foreignClass: cre8MenuContent, foreignReference: id, onUpdate: cascade, onDelete: cascade }
+      file_name:            { type: varchar(128), required: true }
+      width:                { type: integer, required: true }
+      height:               { type: integer, required: true }
+
+  cre8MenuContentTypeImage:
+    columns:
+      id:         ~
+      cre8_menu_content_id: { type: integer, required: true, foreignClass: cre8MenuContent, foreignReference: id, onUpdate: cascade, onDelete: cascade }
+      file_name:            { type: varchar(128), required: true }
+
+  cre8MenuContentTypeCms:
+    columns:
+      id:         ~
+      cre8_menu_content_id: { type: integer, required: true, foreignClass: cre8MenuContent, foreignReference: id, onUpdate: cascade, onDelete: cascade }
+      content:              { type: longvarchar }
+
+  cre8MenuContentTypeInternalLink:
+    columns:
+      id:         ~
+      cre8_menu_content_id: { type: integer, required: true, foreignClass: cre8MenuContent, foreignReference: id, onUpdate: cascade, onDelete: cascade }
+      module:               { type: varchar(255), required: true }
+      action:               { type: varchar(255), required: true }
+      parameters:           { type: varchar(255) }
+
+  cre8MenuContentViewPermission:
+    propel_behaviors:
+      symfony:
+        form:   false
+        filter: false
+    columns:
+      cre8_menu_content_id:   { type: integer, required: true, foreignClass: cre8MenuContent,   foreignReference: id, onUpdate: cascade, onDelete: cascade, primaryKey: true }
+      sf_guard_permission_id: { type: integer, required: true, foreignClass: sfGuardPermission, foreignReference: id, onUpdate: cascade, onDelete: cascade, primaryKey: true }
+

@@ -1,0 +1,24 @@
+PhpmlLists:
+  PhpmlLists_1:
+    listowner: Cre8 New Media Newsletter
+    listemail: newsletter@cre8newmedia.com
+    title: Newsletter
+    description: 'Default newsletter list.'
+    display: '1'
+PhpmlMembers:
+  PhpmlMembers_1:
+    listid: '1'
+    firstname: admin
+    lastname: admin
+    city: ''
+    state: ''
+    country: ''
+    message: ''
+    email: ''
+    regdate: '0'
+    confirmed: '0'
+    approved: '0'
+    deleted: '0'
+    deldate: '0'
+    ip: ''
+    rh: ''

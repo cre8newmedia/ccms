@@ -1,0 +1,87 @@
+all:
+  sf_admin_dash:
+    web_dir:                      /sfAdminDashPlugin
+    image_dir:                    /sfAdminDashPlugin/images/icons/
+    default_image:                icon_gears.png
+    resize_mode:                  thumbnail
+    site:                         CCMS
+    include_path:                 true
+    include_jquery_no_conflict:   true
+    logout:                       true
+    login_route:                  sf_guard_signin
+    logout_route:                 sf_guard_signout
+
+    categories:
+
+      "Users Management":
+        credentials:                  [[admin, moderator, publisher]]
+        items:
+          Users:
+            url:                      sf_guard_user
+            image:                    /images/icons/icon_man.png
+          Groups:
+            url:                      sf_guard_group
+            image:                    /images/icons/icon_group.png
+            credentials:              [admin]
+          Permissions:
+            url:                      sf_guard_permission
+            image:                    /images/icons/icon_permission.png
+            credentials:              [admin]
+      CMS:
+        credentials:                  [[admin, moderator, publisher]]
+        items:
+          Pages:
+            url:                      cre8_menu_content
+            image:                    /images/icons/icon_pen.png
+          Menu:
+            url:                      cre8_menu_type
+            image:                    /images/icons/icon_menu.png
+            credentials:              [moderator]
+          "Slides on Homepage":
+            url:                      cre8_flash_slider2
+            image:                    /images/icons/icon_flash.png
+            credentials:              [moderator]
+
+      News:
+        credentials:                  [[admin, moderator, publisher]]
+        items:
+          "News Items":
+            url:                      cre8_news
+            image:                    /images/icons/icon_calendar.png
+          Categories:
+            url:                      cre8_news_category
+            image:                    /images/icons/icon_tree.png
+
+      "Mailing List":
+        credentials:                  [[admin, moderator, publisher]]
+        items:
+          Manage:
+            url:                      phpmailer
+            image:                    /images/icons/icon_mailing_list.png
+          Configuration:
+            url:                      phpmailer_config
+            image:                    /images/icons/icon_gears.png
+            credentials:              [admin]
+
+
+
+    translator:
+      user:                   # the module we are translating
+        title: Users          # title for that module
+        actions:              # actions array
+          edit:  Edit         # here we specify each action and its translation
+      cre8MenuAdmin:
+        title: Content Management System
+        actions:
+          edit:  Edit
+      cre8_news_category:
+        title: News Category
+        actions:
+          edit:  Edit
+      sfGuardAuth:
+        title: Authorisation
+        actions:
+          secure:  Restricted Area
+      cre8NewsAdmin:
+        title: News
+      

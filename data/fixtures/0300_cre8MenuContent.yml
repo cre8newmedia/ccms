@@ -1,0 +1,11 @@
+cre8MenuContent:
+  home:
+    cre8_menu_type_id:    main_menu
+    name:                 home
+    cre8_content_type_id: cms
+    meta_title:           Home
+
+cre8MenuContentTypeCms:
+  home:
+    cre8_menu_content_id: home
+    content:              Login to backend to change content of homepage

@@ -1,0 +1,726 @@
+propel:
+
+  _attributes:
+    package: plugins.cre8PhpBBPlugin.lib.model
+    defaultIdMethod: native
+
+  phpbb_acl_groups:
+    _attributes: { phpName: PhpbbAclGroups }
+    group_id: { phpName: GroupId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    auth_option_id: { phpName: AuthOptionId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    auth_role_id: { phpName: AuthRoleId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    auth_setting: { phpName: AuthSetting, type: TINYINT, size: '2', required: true, defaultValue: '0' }
+    _indexes: { group_id: [group_id], auth_opt_id: [auth_option_id], auth_role_id: [auth_role_id] }
+  phpbb_acl_options:
+    _attributes: { phpName: PhpbbAclOptions }
+    auth_option_id: { phpName: AuthOptionId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    auth_option: { phpName: AuthOption, type: VARCHAR, size: '50', required: true, defaultValue: '' }
+    is_global: { phpName: IsGlobal, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    is_local: { phpName: IsLocal, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    founder_only: { phpName: FounderOnly, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    _uniques: { auth_option: [auth_option] }
+  phpbb_acl_roles:
+    _attributes: { phpName: PhpbbAclRoles }
+    role_id: { phpName: RoleId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    role_name: { phpName: RoleName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    role_description: { phpName: RoleDescription, type: LONGVARCHAR, required: true }
+    role_type: { phpName: RoleType, type: VARCHAR, size: '10', required: true, defaultValue: '' }
+    role_order: { phpName: RoleOrder, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    _indexes: { role_type: [role_type], role_order: [role_order] }
+  phpbb_acl_roles_data:
+    _attributes: { phpName: PhpbbAclRolesData }
+    role_id: { phpName: RoleId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    auth_option_id: { phpName: AuthOptionId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    auth_setting: { phpName: AuthSetting, type: TINYINT, size: '2', required: true, defaultValue: '0' }
+    _indexes: { ath_op_id: [auth_option_id] }
+  phpbb_acl_users:
+    _attributes: { phpName: PhpbbAclUsers }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    auth_option_id: { phpName: AuthOptionId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    auth_role_id: { phpName: AuthRoleId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    auth_setting: { phpName: AuthSetting, type: TINYINT, size: '2', required: true, defaultValue: '0' }
+    _indexes: { user_id: [user_id], auth_option_id: [auth_option_id], auth_role_id: [auth_role_id] }
+  phpbb_attachments:
+    _attributes: { phpName: PhpbbAttachments }
+    attach_id: { phpName: AttachId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    post_msg_id: { phpName: PostMsgId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_id: { phpName: TopicId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    in_message: { phpName: InMessage, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    poster_id: { phpName: PosterId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    is_orphan: { phpName: IsOrphan, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    physical_filename: { phpName: PhysicalFilename, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    real_filename: { phpName: RealFilename, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    download_count: { phpName: DownloadCount, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    attach_comment: { phpName: AttachComment, type: LONGVARCHAR, required: true }
+    extension: { phpName: Extension, type: VARCHAR, size: '100', required: true, defaultValue: '' }
+    mimetype: { phpName: Mimetype, type: VARCHAR, size: '100', required: true, defaultValue: '' }
+    filesize: { phpName: Filesize, type: INTEGER, size: '20', required: true, defaultValue: '0' }
+    filetime: { phpName: Filetime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    thumbnail: { phpName: Thumbnail, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    _indexes: { filetime: [filetime], post_msg_id: [post_msg_id], topic_id: [topic_id], poster_id: [poster_id], is_orphan: [is_orphan] }
+  phpbb_banlist:
+    _attributes: { phpName: PhpbbBanlist }
+    ban_id: { phpName: BanId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    ban_userid: { phpName: BanUserid, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    ban_ip: { phpName: BanIp, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    ban_email: { phpName: BanEmail, type: VARCHAR, size: '100', required: true, defaultValue: '' }
+    ban_start: { phpName: BanStart, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    ban_end: { phpName: BanEnd, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    ban_exclude: { phpName: BanExclude, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    ban_reason: { phpName: BanReason, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    ban_give_reason: { phpName: BanGiveReason, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    _indexes: { ban_end: [ban_end], ban_user: [ban_userid, ban_exclude], ban_email: [ban_email, ban_exclude], ban_ip: [ban_ip, ban_exclude] }
+  phpbb_bbcodes:
+    _attributes: { phpName: PhpbbBbcodes }
+    bbcode_id: { phpName: BbcodeId, type: TINYINT, size: '3', primaryKey: true, required: true, defaultValue: '0' }
+    bbcode_tag: { phpName: BbcodeTag, type: VARCHAR, size: '16', required: true, defaultValue: '' }
+    bbcode_helpline: { phpName: BbcodeHelpline, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    display_on_posting: { phpName: DisplayOnPosting, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    bbcode_match: { phpName: BbcodeMatch, type: LONGVARCHAR, required: true }
+    bbcode_tpl: { phpName: BbcodeTpl, type: LONGVARCHAR, required: true }
+    first_pass_match: { phpName: FirstPassMatch, type: LONGVARCHAR, required: true }
+    first_pass_replace: { phpName: FirstPassReplace, type: LONGVARCHAR, required: true }
+    second_pass_match: { phpName: SecondPassMatch, type: LONGVARCHAR, required: true }
+    second_pass_replace: { phpName: SecondPassReplace, type: LONGVARCHAR, required: true }
+    _indexes: { display_on_post: [display_on_posting] }
+  phpbb_bookmarks:
+    _attributes: { phpName: PhpbbBookmarks }
+    topic_id: { phpName: TopicId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+  phpbb_bots:
+    _attributes: { phpName: PhpbbBots }
+    bot_id: { phpName: BotId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    bot_active: { phpName: BotActive, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    bot_name: { phpName: BotName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    bot_agent: { phpName: BotAgent, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    bot_ip: { phpName: BotIp, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    _indexes: { bot_active: [bot_active] }
+  phpbb_config:
+    _attributes: { phpName: PhpbbConfig }
+    config_name: { phpName: ConfigName, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    config_value: { phpName: ConfigValue, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    is_dynamic: { phpName: IsDynamic, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    _indexes: { is_dynamic: [is_dynamic] }
+  phpbb_confirm:
+    _attributes: { phpName: PhpbbConfirm }
+    confirm_id: { phpName: ConfirmId, type: CHAR, size: '32', primaryKey: true, required: true, defaultValue: '' }
+    session_id: { phpName: SessionId, type: CHAR, size: '32', primaryKey: true, required: true, defaultValue: '' }
+    confirm_type: { phpName: ConfirmType, type: TINYINT, size: '3', required: true, defaultValue: '0' }
+    code: { phpName: Code, type: VARCHAR, size: '8', required: true, defaultValue: '' }
+    seed: { phpName: Seed, type: INTEGER, size: '10', required: true, defaultValue: '0' }
+    attempts: { phpName: Attempts, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    _indexes: { confirm_type: [confirm_type] }
+  phpbb_disallow:
+    _attributes: { phpName: PhpbbDisallow }
+    disallow_id: { phpName: DisallowId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    disallow_username: { phpName: DisallowUsername, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+  phpbb_drafts:
+    _attributes: { phpName: PhpbbDrafts }
+    draft_id: { phpName: DraftId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_id: { phpName: TopicId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    save_time: { phpName: SaveTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    draft_subject: { phpName: DraftSubject, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    draft_message: { phpName: DraftMessage, type: LONGVARCHAR, required: true }
+    _indexes: { save_time: [save_time] }
+  phpbb_extension_groups:
+    _attributes: { phpName: PhpbbExtensionGroups }
+    group_id: { phpName: GroupId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    group_name: { phpName: GroupName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    cat_id: { phpName: CatId, type: TINYINT, size: '2', required: true, defaultValue: '0' }
+    allow_group: { phpName: AllowGroup, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    download_mode: { phpName: DownloadMode, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    upload_icon: { phpName: UploadIcon, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    max_filesize: { phpName: MaxFilesize, type: INTEGER, size: '20', required: true, defaultValue: '0' }
+    allowed_forums: { phpName: AllowedForums, type: LONGVARCHAR, required: true }
+    allow_in_pm: { phpName: AllowInPm, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+  phpbb_extensions:
+    _attributes: { phpName: PhpbbExtensions }
+    extension_id: { phpName: ExtensionId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    group_id: { phpName: GroupId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    extension: { phpName: Extension, type: VARCHAR, size: '100', required: true, defaultValue: '' }
+  phpbb_forums:
+    _attributes: { phpName: PhpbbForums }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    parent_id: { phpName: ParentId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    left_id: { phpName: LeftId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    right_id: { phpName: RightId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_parents: { phpName: ForumParents, type: LONGVARCHAR, required: true }
+    forum_name: { phpName: ForumName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    forum_desc: { phpName: ForumDesc, type: LONGVARCHAR, required: true }
+    forum_desc_bitfield: { phpName: ForumDescBitfield, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    forum_desc_options: { phpName: ForumDescOptions, type: INTEGER, size: '11', required: true, defaultValue: '7' }
+    forum_desc_uid: { phpName: ForumDescUid, type: VARCHAR, size: '8', required: true, defaultValue: '' }
+    forum_link: { phpName: ForumLink, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    forum_password: { phpName: ForumPassword, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    forum_style: { phpName: ForumStyle, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_image: { phpName: ForumImage, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    forum_rules: { phpName: ForumRules, type: LONGVARCHAR, required: true }
+    forum_rules_link: { phpName: ForumRulesLink, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    forum_rules_bitfield: { phpName: ForumRulesBitfield, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    forum_rules_options: { phpName: ForumRulesOptions, type: INTEGER, size: '11', required: true, defaultValue: '7' }
+    forum_rules_uid: { phpName: ForumRulesUid, type: VARCHAR, size: '8', required: true, defaultValue: '' }
+    forum_topics_per_page: { phpName: ForumTopicsPerPage, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    forum_type: { phpName: ForumType, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    forum_status: { phpName: ForumStatus, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    forum_posts: { phpName: ForumPosts, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_topics: { phpName: ForumTopics, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_topics_real: { phpName: ForumTopicsReal, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_last_post_id: { phpName: ForumLastPostId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_last_poster_id: { phpName: ForumLastPosterId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_last_post_subject: { phpName: ForumLastPostSubject, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    forum_last_post_time: { phpName: ForumLastPostTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    forum_last_poster_name: { phpName: ForumLastPosterName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    forum_last_poster_colour: { phpName: ForumLastPosterColour, type: VARCHAR, size: '6', required: true, defaultValue: '' }
+    forum_flags: { phpName: ForumFlags, type: TINYINT, size: '4', required: true, defaultValue: '32' }
+    forum_options: { phpName: ForumOptions, type: INTEGER, size: '20', required: true, defaultValue: '0' }
+    display_subforum_list: { phpName: DisplaySubforumList, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    display_on_index: { phpName: DisplayOnIndex, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    enable_indexing: { phpName: EnableIndexing, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    enable_icons: { phpName: EnableIcons, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    enable_prune: { phpName: EnablePrune, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    prune_next: { phpName: PruneNext, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    prune_days: { phpName: PruneDays, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    prune_viewed: { phpName: PruneViewed, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    prune_freq: { phpName: PruneFreq, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    _indexes: { left_right_id: [left_id, right_id], forum_lastpost_id: [forum_last_post_id] }
+  phpbb_forums_access:
+    _attributes: { phpName: PhpbbForumsAccess }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    session_id: { phpName: SessionId, type: CHAR, size: '32', primaryKey: true, required: true, defaultValue: '' }
+  phpbb_forums_track:
+    _attributes: { phpName: PhpbbForumsTrack }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    mark_time: { phpName: MarkTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+  phpbb_forums_watch:
+    _attributes: { phpName: PhpbbForumsWatch }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    notify_status: { phpName: NotifyStatus, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    _indexes: { forum_id: [forum_id], user_id: [user_id], notify_stat: [notify_status] }
+  phpbb_groups:
+    _attributes: { phpName: PhpbbGroups }
+    group_id: { phpName: GroupId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    group_type: { phpName: GroupType, type: TINYINT, size: '4', required: true, defaultValue: '1' }
+    group_founder_manage: { phpName: GroupFounderManage, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    group_skip_auth: { phpName: GroupSkipAuth, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    group_name: { phpName: GroupName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    group_desc: { phpName: GroupDesc, type: LONGVARCHAR, required: true }
+    group_desc_bitfield: { phpName: GroupDescBitfield, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    group_desc_options: { phpName: GroupDescOptions, type: INTEGER, size: '11', required: true, defaultValue: '7' }
+    group_desc_uid: { phpName: GroupDescUid, type: VARCHAR, size: '8', required: true, defaultValue: '' }
+    group_display: { phpName: GroupDisplay, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    group_avatar: { phpName: GroupAvatar, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    group_avatar_type: { phpName: GroupAvatarType, type: TINYINT, size: '2', required: true, defaultValue: '0' }
+    group_avatar_width: { phpName: GroupAvatarWidth, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    group_avatar_height: { phpName: GroupAvatarHeight, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    group_rank: { phpName: GroupRank, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    group_colour: { phpName: GroupColour, type: VARCHAR, size: '6', required: true, defaultValue: '' }
+    group_sig_chars: { phpName: GroupSigChars, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    group_receive_pm: { phpName: GroupReceivePm, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    group_message_limit: { phpName: GroupMessageLimit, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    group_max_recipients: { phpName: GroupMaxRecipients, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    group_legend: { phpName: GroupLegend, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    _indexes: { group_legend_name: [group_legend, group_name] }
+  phpbb_icons:
+    _attributes: { phpName: PhpbbIcons }
+    icons_id: { phpName: IconsId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    icons_url: { phpName: IconsUrl, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    icons_width: { phpName: IconsWidth, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    icons_height: { phpName: IconsHeight, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    icons_order: { phpName: IconsOrder, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    display_on_posting: { phpName: DisplayOnPosting, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    _indexes: { display_on_posting: [display_on_posting] }
+  phpbb_lang:
+    _attributes: { phpName: PhpbbLang }
+    lang_id: { phpName: LangId, type: TINYINT, size: '4', primaryKey: true, autoIncrement: true, required: true }
+    lang_iso: { phpName: LangIso, type: VARCHAR, size: '30', required: true, defaultValue: '' }
+    lang_dir: { phpName: LangDir, type: VARCHAR, size: '30', required: true, defaultValue: '' }
+    lang_english_name: { phpName: LangEnglishName, type: VARCHAR, size: '100', required: true, defaultValue: '' }
+    lang_local_name: { phpName: LangLocalName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    lang_author: { phpName: LangAuthor, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    _indexes: { lang_iso: [lang_iso] }
+  phpbb_log:
+    _attributes: { phpName: PhpbbLog }
+    log_id: { phpName: LogId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    log_type: { phpName: LogType, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_id: { phpName: TopicId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    reportee_id: { phpName: ReporteeId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    log_ip: { phpName: LogIp, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    log_time: { phpName: LogTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    log_operation: { phpName: LogOperation, type: LONGVARCHAR, required: true }
+    log_data: { phpName: LogData, type: LONGVARCHAR, required: true }
+    _indexes: { log_type: [log_type], forum_id: [forum_id], topic_id: [topic_id], reportee_id: [reportee_id], user_id: [user_id] }
+  phpbb_moderator_cache:
+    _attributes: { phpName: PhpbbModeratorCache }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    username: { phpName: Username, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    group_id: { phpName: GroupId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    group_name: { phpName: GroupName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    display_on_index: { phpName: DisplayOnIndex, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    _indexes: { disp_idx: [display_on_index], forum_id: [forum_id] }
+  phpbb_modules:
+    _attributes: { phpName: PhpbbModules }
+    module_id: { phpName: ModuleId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    module_enabled: { phpName: ModuleEnabled, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    module_display: { phpName: ModuleDisplay, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    module_basename: { phpName: ModuleBasename, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    module_class: { phpName: ModuleClass, type: VARCHAR, size: '10', required: true, defaultValue: '' }
+    parent_id: { phpName: ParentId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    left_id: { phpName: LeftId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    right_id: { phpName: RightId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    module_langname: { phpName: ModuleLangname, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    module_mode: { phpName: ModuleMode, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    module_auth: { phpName: ModuleAuth, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    _indexes: { left_right_id: [left_id, right_id], module_enabled: [module_enabled], class_left_id: [module_class, left_id] }
+  phpbb_poll_options:
+    _attributes: { phpName: PhpbbPollOptions }
+    poll_option_id: { phpName: PollOptionId, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    topic_id: { phpName: TopicId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    poll_option_text: { phpName: PollOptionText, type: LONGVARCHAR, required: true }
+    poll_option_total: { phpName: PollOptionTotal, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    _indexes: { poll_opt_id: [poll_option_id], topic_id: [topic_id] }
+  phpbb_poll_votes:
+    _attributes: { phpName: PhpbbPollVotes }
+    topic_id: { phpName: TopicId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    poll_option_id: { phpName: PollOptionId, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    vote_user_id: { phpName: VoteUserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    vote_user_ip: { phpName: VoteUserIp, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    _indexes: { topic_id: [topic_id], vote_user_id: [vote_user_id], vote_user_ip: [vote_user_ip] }
+  phpbb_posts:
+    _attributes: { phpName: PhpbbPosts }
+    post_id: { phpName: PostId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    topic_id: { phpName: TopicId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    poster_id: { phpName: PosterId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    icon_id: { phpName: IconId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    poster_ip: { phpName: PosterIp, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    post_time: { phpName: PostTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    post_approved: { phpName: PostApproved, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    post_reported: { phpName: PostReported, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    enable_bbcode: { phpName: EnableBbcode, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    enable_smilies: { phpName: EnableSmilies, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    enable_magic_url: { phpName: EnableMagicUrl, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    enable_sig: { phpName: EnableSig, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    post_username: { phpName: PostUsername, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    post_subject: { phpName: PostSubject, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    post_text: { phpName: PostText, type: LONGVARCHAR, required: true }
+    post_checksum: { phpName: PostChecksum, type: VARCHAR, size: '32', required: true, defaultValue: '' }
+    post_attachment: { phpName: PostAttachment, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    bbcode_bitfield: { phpName: BbcodeBitfield, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    bbcode_uid: { phpName: BbcodeUid, type: VARCHAR, size: '8', required: true, defaultValue: '' }
+    post_postcount: { phpName: PostPostcount, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    post_edit_time: { phpName: PostEditTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    post_edit_reason: { phpName: PostEditReason, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    post_edit_user: { phpName: PostEditUser, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    post_edit_count: { phpName: PostEditCount, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    post_edit_locked: { phpName: PostEditLocked, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    _indexes: { forum_id: [forum_id], topic_id: [topic_id], poster_ip: [poster_ip], poster_id: [poster_id], post_approved: [post_approved], post_username: [post_username], tid_post_time: [topic_id, post_time] }
+  phpbb_privmsgs:
+    _attributes: { phpName: PhpbbPrivmsgs }
+    msg_id: { phpName: MsgId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    root_level: { phpName: RootLevel, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    author_id: { phpName: AuthorId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    icon_id: { phpName: IconId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    author_ip: { phpName: AuthorIp, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    message_time: { phpName: MessageTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    enable_bbcode: { phpName: EnableBbcode, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    enable_smilies: { phpName: EnableSmilies, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    enable_magic_url: { phpName: EnableMagicUrl, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    enable_sig: { phpName: EnableSig, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    message_subject: { phpName: MessageSubject, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    message_text: { phpName: MessageText, type: LONGVARCHAR, required: true }
+    message_edit_reason: { phpName: MessageEditReason, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    message_edit_user: { phpName: MessageEditUser, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    message_attachment: { phpName: MessageAttachment, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    bbcode_bitfield: { phpName: BbcodeBitfield, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    bbcode_uid: { phpName: BbcodeUid, type: VARCHAR, size: '8', required: true, defaultValue: '' }
+    message_edit_time: { phpName: MessageEditTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    message_edit_count: { phpName: MessageEditCount, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    to_address: { phpName: ToAddress, type: LONGVARCHAR, required: true }
+    bcc_address: { phpName: BccAddress, type: LONGVARCHAR, required: true }
+    message_reported: { phpName: MessageReported, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    _indexes: { author_ip: [author_ip], message_time: [message_time], author_id: [author_id], root_level: [root_level] }
+  phpbb_privmsgs_folder:
+    _attributes: { phpName: PhpbbPrivmsgsFolder }
+    folder_id: { phpName: FolderId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    folder_name: { phpName: FolderName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    pm_count: { phpName: PmCount, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    _indexes: { user_id: [user_id] }
+  phpbb_privmsgs_rules:
+    _attributes: { phpName: PhpbbPrivmsgsRules }
+    rule_id: { phpName: RuleId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    rule_check: { phpName: RuleCheck, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    rule_connection: { phpName: RuleConnection, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    rule_string: { phpName: RuleString, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    rule_user_id: { phpName: RuleUserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    rule_group_id: { phpName: RuleGroupId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    rule_action: { phpName: RuleAction, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    rule_folder_id: { phpName: RuleFolderId, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    _indexes: { user_id: [user_id] }
+  phpbb_privmsgs_to:
+    _attributes: { phpName: PhpbbPrivmsgsTo }
+    msg_id: { phpName: MsgId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    author_id: { phpName: AuthorId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    pm_deleted: { phpName: PmDeleted, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    pm_new: { phpName: PmNew, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    pm_unread: { phpName: PmUnread, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    pm_replied: { phpName: PmReplied, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    pm_marked: { phpName: PmMarked, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    pm_forwarded: { phpName: PmForwarded, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    folder_id: { phpName: FolderId, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    _indexes: { msg_id: [msg_id], author_id: [author_id], usr_flder_id: [user_id, folder_id] }
+  phpbb_profile_fields:
+    _attributes: { phpName: PhpbbProfileFields }
+    field_id: { phpName: FieldId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    field_name: { phpName: FieldName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    field_type: { phpName: FieldType, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    field_ident: { phpName: FieldIdent, type: VARCHAR, size: '20', required: true, defaultValue: '' }
+    field_length: { phpName: FieldLength, type: VARCHAR, size: '20', required: true, defaultValue: '' }
+    field_minlen: { phpName: FieldMinlen, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    field_maxlen: { phpName: FieldMaxlen, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    field_novalue: { phpName: FieldNovalue, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    field_default_value: { phpName: FieldDefaultValue, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    field_validation: { phpName: FieldValidation, type: VARCHAR, size: '20', required: true, defaultValue: '' }
+    field_required: { phpName: FieldRequired, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    field_show_on_reg: { phpName: FieldShowOnReg, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    field_show_on_vt: { phpName: FieldShowOnVt, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    field_show_profile: { phpName: FieldShowProfile, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    field_hide: { phpName: FieldHide, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    field_no_view: { phpName: FieldNoView, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    field_active: { phpName: FieldActive, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    field_order: { phpName: FieldOrder, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    _indexes: { fld_type: [field_type], fld_ordr: [field_order] }
+  phpbb_profile_fields_data:
+    _attributes: { phpName: PhpbbProfileFieldsData }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    pf_project_user_id: { phpName: PfProjectUserId, type: BIGINT, size: '20', required: false }
+  phpbb_profile_fields_lang:
+    _attributes: { phpName: PhpbbProfileFieldsLang }
+    field_id: { phpName: FieldId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    lang_id: { phpName: LangId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    option_id: { phpName: OptionId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    field_type: { phpName: FieldType, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    lang_value: { phpName: LangValue, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+  phpbb_profile_lang:
+    _attributes: { phpName: PhpbbProfileLang }
+    field_id: { phpName: FieldId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    lang_id: { phpName: LangId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    lang_name: { phpName: LangName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    lang_explain: { phpName: LangExplain, type: LONGVARCHAR, required: true }
+    lang_default_value: { phpName: LangDefaultValue, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+  phpbb_ranks:
+    _attributes: { phpName: PhpbbRanks }
+    rank_id: { phpName: RankId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    rank_title: { phpName: RankTitle, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    rank_min: { phpName: RankMin, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    rank_special: { phpName: RankSpecial, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    rank_image: { phpName: RankImage, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+  phpbb_reports:
+    _attributes: { phpName: PhpbbReports }
+    report_id: { phpName: ReportId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    reason_id: { phpName: ReasonId, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    post_id: { phpName: PostId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    pm_id: { phpName: PmId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    user_notify: { phpName: UserNotify, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    report_closed: { phpName: ReportClosed, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    report_time: { phpName: ReportTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    report_text: { phpName: ReportText, type: LONGVARCHAR, required: true }
+    _indexes: { post_id: [post_id], pm_id: [pm_id] }
+  phpbb_reports_reasons:
+    _attributes: { phpName: PhpbbReportsReasons }
+    reason_id: { phpName: ReasonId, type: SMALLINT, size: '4', primaryKey: true, autoIncrement: true, required: true }
+    reason_title: { phpName: ReasonTitle, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    reason_description: { phpName: ReasonDescription, type: LONGVARCHAR, required: true }
+    reason_order: { phpName: ReasonOrder, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+  phpbb_search_results:
+    _attributes: { phpName: PhpbbSearchResults }
+    search_key: { phpName: SearchKey, type: VARCHAR, size: '32', primaryKey: true, required: true, defaultValue: '' }
+    search_time: { phpName: SearchTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    search_keywords: { phpName: SearchKeywords, type: LONGVARCHAR, required: true }
+    search_authors: { phpName: SearchAuthors, type: LONGVARCHAR, required: true }
+  phpbb_search_wordlist:
+    _attributes: { phpName: PhpbbSearchWordlist }
+    word_id: { phpName: WordId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    word_text: { phpName: WordText, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    word_common: { phpName: WordCommon, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    word_count: { phpName: WordCount, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    _indexes: { wrd_cnt: [word_count] }
+    _uniques: { wrd_txt: [word_text] }
+  phpbb_search_wordmatch:
+    _attributes: { phpName: PhpbbSearchWordmatch }
+    post_id: { phpName: PostId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    word_id: { phpName: WordId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    title_match: { phpName: TitleMatch, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    _indexes: { word_id: [word_id], post_id: [post_id] }
+    _uniques: { unq_mtch: [word_id, post_id, title_match] }
+  phpbb_sessions:
+    _attributes: { phpName: PhpbbSessions }
+    session_id: { phpName: SessionId, type: CHAR, size: '32', primaryKey: true, required: true, defaultValue: '' }
+    session_user_id: { phpName: SessionUserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    session_forum_id: { phpName: SessionForumId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    session_last_visit: { phpName: SessionLastVisit, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    session_start: { phpName: SessionStart, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    session_time: { phpName: SessionTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    session_ip: { phpName: SessionIp, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    session_browser: { phpName: SessionBrowser, type: VARCHAR, size: '150', required: true, defaultValue: '' }
+    session_forwarded_for: { phpName: SessionForwardedFor, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    session_page: { phpName: SessionPage, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    session_viewonline: { phpName: SessionViewonline, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    session_autologin: { phpName: SessionAutologin, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    session_admin: { phpName: SessionAdmin, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    _indexes: { session_time: [session_time], session_user_id: [session_user_id], session_fid: [session_forum_id] }
+  phpbb_sessions_keys:
+    _attributes: { phpName: PhpbbSessionsKeys }
+    key_id: { phpName: KeyId, type: CHAR, size: '32', primaryKey: true, required: true, defaultValue: '' }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    last_ip: { phpName: LastIp, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    last_login: { phpName: LastLogin, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    _indexes: { last_login: [last_login] }
+  phpbb_sitelist:
+    _attributes: { phpName: PhpbbSitelist }
+    site_id: { phpName: SiteId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    site_ip: { phpName: SiteIp, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    site_hostname: { phpName: SiteHostname, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    ip_exclude: { phpName: IpExclude, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+  phpbb_smilies:
+    _attributes: { phpName: PhpbbSmilies }
+    smiley_id: { phpName: SmileyId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    code: { phpName: Code, type: VARCHAR, size: '50', required: true, defaultValue: '' }
+    emotion: { phpName: Emotion, type: VARCHAR, size: '50', required: true, defaultValue: '' }
+    smiley_url: { phpName: SmileyUrl, type: VARCHAR, size: '50', required: true, defaultValue: '' }
+    smiley_width: { phpName: SmileyWidth, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    smiley_height: { phpName: SmileyHeight, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    smiley_order: { phpName: SmileyOrder, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    display_on_posting: { phpName: DisplayOnPosting, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    _indexes: { display_on_post: [display_on_posting] }
+  phpbb_styles:
+    _attributes: { phpName: PhpbbStyles }
+    style_id: { phpName: StyleId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    style_name: { phpName: StyleName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    style_copyright: { phpName: StyleCopyright, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    style_active: { phpName: StyleActive, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    template_id: { phpName: TemplateId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    theme_id: { phpName: ThemeId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    imageset_id: { phpName: ImagesetId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    _indexes: { template_id: [template_id], theme_id: [theme_id], imageset_id: [imageset_id] }
+    _uniques: { style_name: [style_name] }
+  phpbb_styles_imageset:
+    _attributes: { phpName: PhpbbStylesImageset }
+    imageset_id: { phpName: ImagesetId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    imageset_name: { phpName: ImagesetName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    imageset_copyright: { phpName: ImagesetCopyright, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    imageset_path: { phpName: ImagesetPath, type: VARCHAR, size: '100', required: true, defaultValue: '' }
+    _uniques: { imgset_nm: [imageset_name] }
+  phpbb_styles_imageset_data:
+    _attributes: { phpName: PhpbbStylesImagesetData }
+    image_id: { phpName: ImageId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    image_name: { phpName: ImageName, type: VARCHAR, size: '200', required: true, defaultValue: '' }
+    image_filename: { phpName: ImageFilename, type: VARCHAR, size: '200', required: true, defaultValue: '' }
+    image_lang: { phpName: ImageLang, type: VARCHAR, size: '30', required: true, defaultValue: '' }
+    image_height: { phpName: ImageHeight, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    image_width: { phpName: ImageWidth, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    imageset_id: { phpName: ImagesetId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    _indexes: { i_d: [imageset_id] }
+  phpbb_styles_template:
+    _attributes: { phpName: PhpbbStylesTemplate }
+    template_id: { phpName: TemplateId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    template_name: { phpName: TemplateName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    template_copyright: { phpName: TemplateCopyright, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    template_path: { phpName: TemplatePath, type: VARCHAR, size: '100', required: true, defaultValue: '' }
+    bbcode_bitfield: { phpName: BbcodeBitfield, type: VARCHAR, size: '255', required: true, defaultValue: kNg= }
+    template_storedb: { phpName: TemplateStoredb, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    template_inherits_id: { phpName: TemplateInheritsId, type: INTEGER, size: '4', required: true, defaultValue: '0' }
+    template_inherit_path: { phpName: TemplateInheritPath, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    _uniques: { tmplte_nm: [template_name] }
+  phpbb_styles_template_data:
+    _attributes: { phpName: PhpbbStylesTemplateData }
+    template_id: { phpName: TemplateId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    template_filename: { phpName: TemplateFilename, type: VARCHAR, size: '100', required: true, defaultValue: '' }
+    template_included: { phpName: TemplateIncluded, type: LONGVARCHAR, required: true }
+    template_mtime: { phpName: TemplateMtime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    template_data: { phpName: TemplateData, type: LONGVARCHAR, required: true }
+    _indexes: { tid: [template_id], tfn: [template_filename] }
+  phpbb_styles_theme:
+    _attributes: { phpName: PhpbbStylesTheme }
+    theme_id: { phpName: ThemeId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    theme_name: { phpName: ThemeName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    theme_copyright: { phpName: ThemeCopyright, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    theme_path: { phpName: ThemePath, type: VARCHAR, size: '100', required: true, defaultValue: '' }
+    theme_storedb: { phpName: ThemeStoredb, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    theme_mtime: { phpName: ThemeMtime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    theme_data: { phpName: ThemeData, type: LONGVARCHAR, required: true }
+    _uniques: { theme_name: [theme_name] }
+  phpbb_topics:
+    _attributes: { phpName: PhpbbTopics }
+    topic_id: { phpName: TopicId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    icon_id: { phpName: IconId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_attachment: { phpName: TopicAttachment, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    topic_approved: { phpName: TopicApproved, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    topic_reported: { phpName: TopicReported, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    topic_title: { phpName: TopicTitle, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    topic_poster: { phpName: TopicPoster, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_time: { phpName: TopicTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    topic_time_limit: { phpName: TopicTimeLimit, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    topic_views: { phpName: TopicViews, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_replies: { phpName: TopicReplies, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_replies_real: { phpName: TopicRepliesReal, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_status: { phpName: TopicStatus, type: TINYINT, size: '3', required: true, defaultValue: '0' }
+    topic_type: { phpName: TopicType, type: TINYINT, size: '3', required: true, defaultValue: '0' }
+    topic_first_post_id: { phpName: TopicFirstPostId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_first_poster_name: { phpName: TopicFirstPosterName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    topic_first_poster_colour: { phpName: TopicFirstPosterColour, type: VARCHAR, size: '6', required: true, defaultValue: '' }
+    topic_last_post_id: { phpName: TopicLastPostId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_last_poster_id: { phpName: TopicLastPosterId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_last_poster_name: { phpName: TopicLastPosterName, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    topic_last_poster_colour: { phpName: TopicLastPosterColour, type: VARCHAR, size: '6', required: true, defaultValue: '' }
+    topic_last_post_subject: { phpName: TopicLastPostSubject, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    topic_last_post_time: { phpName: TopicLastPostTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    topic_last_view_time: { phpName: TopicLastViewTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    topic_moved_id: { phpName: TopicMovedId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    topic_bumped: { phpName: TopicBumped, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    topic_bumper: { phpName: TopicBumper, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    poll_title: { phpName: PollTitle, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    poll_start: { phpName: PollStart, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    poll_length: { phpName: PollLength, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    poll_max_options: { phpName: PollMaxOptions, type: TINYINT, size: '4', required: true, defaultValue: '1' }
+    poll_last_vote: { phpName: PollLastVote, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    poll_vote_change: { phpName: PollVoteChange, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    _indexes: { forum_id: [forum_id], forum_id_type: [forum_id, topic_type], last_post_time: [topic_last_post_time], topic_approved: [topic_approved], forum_appr_last: [forum_id, topic_approved, topic_last_post_id], fid_time_moved: [forum_id, topic_last_post_time, topic_moved_id] }
+  phpbb_topics_posted:
+    _attributes: { phpName: PhpbbTopicsPosted }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    topic_id: { phpName: TopicId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    topic_posted: { phpName: TopicPosted, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+  phpbb_topics_track:
+    _attributes: { phpName: PhpbbTopicsTrack }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    topic_id: { phpName: TopicId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    forum_id: { phpName: ForumId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    mark_time: { phpName: MarkTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    _indexes: { topic_id: [topic_id], forum_id: [forum_id] }
+  phpbb_topics_watch:
+    _attributes: { phpName: PhpbbTopicsWatch }
+    topic_id: { phpName: TopicId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    notify_status: { phpName: NotifyStatus, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    _indexes: { topic_id: [topic_id], user_id: [user_id], notify_stat: [notify_status] }
+  phpbb_user_group:
+    _attributes: { phpName: PhpbbUserGroup }
+    group_id: { phpName: GroupId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    group_leader: { phpName: GroupLeader, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    user_pending: { phpName: UserPending, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    _indexes: { group_id: [group_id], user_id: [user_id], group_leader: [group_leader] }
+  phpbb_users:
+    _attributes: { phpName: PhpbbUsers }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    user_type: { phpName: UserType, type: TINYINT, size: '2', required: true, defaultValue: '0' }
+    group_id: { phpName: GroupId, type: SMALLINT, size: '8', required: true, defaultValue: '3' }
+    user_permissions: { phpName: UserPermissions, type: LONGVARCHAR, required: true }
+    user_perm_from: { phpName: UserPermFrom, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    user_ip: { phpName: UserIp, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    user_regdate: { phpName: UserRegdate, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    username: { phpName: Username, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    username_clean: { phpName: UsernameClean, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    user_password: { phpName: UserPassword, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    user_passchg: { phpName: UserPasschg, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    user_pass_convert: { phpName: UserPassConvert, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    user_email: { phpName: UserEmail, type: VARCHAR, size: '100', required: true, defaultValue: '' }
+    user_email_hash: { phpName: UserEmailHash, type: BIGINT, size: '20', required: true, defaultValue: '0' }
+    user_birthday: { phpName: UserBirthday, type: VARCHAR, size: '10', required: true, defaultValue: '' }
+    user_lastvisit: { phpName: UserLastvisit, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    user_lastmark: { phpName: UserLastmark, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    user_lastpost_time: { phpName: UserLastpostTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    user_lastpage: { phpName: UserLastpage, type: VARCHAR, size: '200', required: true, defaultValue: '' }
+    user_last_confirm_key: { phpName: UserLastConfirmKey, type: VARCHAR, size: '10', required: true, defaultValue: '' }
+    user_last_search: { phpName: UserLastSearch, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    user_warnings: { phpName: UserWarnings, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    user_last_warning: { phpName: UserLastWarning, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    user_login_attempts: { phpName: UserLoginAttempts, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    user_inactive_reason: { phpName: UserInactiveReason, type: TINYINT, size: '2', required: true, defaultValue: '0' }
+    user_inactive_time: { phpName: UserInactiveTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    user_posts: { phpName: UserPosts, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    user_lang: { phpName: UserLang, type: VARCHAR, size: '30', required: true, defaultValue: '' }
+    user_timezone: { phpName: UserTimezone, type: DECIMAL, size: '5', scale: '2', required: true, defaultValue: '0.00' }
+    user_dst: { phpName: UserDst, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    user_dateformat: { phpName: UserDateformat, type: VARCHAR, size: '30', required: true, defaultValue: 'd M Y H:i' }
+    user_style: { phpName: UserStyle, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    user_rank: { phpName: UserRank, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    user_colour: { phpName: UserColour, type: VARCHAR, size: '6', required: true, defaultValue: '' }
+    user_new_privmsg: { phpName: UserNewPrivmsg, type: INTEGER, size: '4', required: true, defaultValue: '0' }
+    user_unread_privmsg: { phpName: UserUnreadPrivmsg, type: INTEGER, size: '4', required: true, defaultValue: '0' }
+    user_last_privmsg: { phpName: UserLastPrivmsg, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    user_message_rules: { phpName: UserMessageRules, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    user_full_folder: { phpName: UserFullFolder, type: INTEGER, size: '11', required: true, defaultValue: '-3' }
+    user_emailtime: { phpName: UserEmailtime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    user_topic_show_days: { phpName: UserTopicShowDays, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    user_topic_sortby_type: { phpName: UserTopicSortbyType, type: VARCHAR, size: '1', required: true, defaultValue: t }
+    user_topic_sortby_dir: { phpName: UserTopicSortbyDir, type: VARCHAR, size: '1', required: true, defaultValue: d }
+    user_post_show_days: { phpName: UserPostShowDays, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    user_post_sortby_type: { phpName: UserPostSortbyType, type: VARCHAR, size: '1', required: true, defaultValue: t }
+    user_post_sortby_dir: { phpName: UserPostSortbyDir, type: VARCHAR, size: '1', required: true, defaultValue: a }
+    user_notify: { phpName: UserNotify, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    user_notify_pm: { phpName: UserNotifyPm, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    user_notify_type: { phpName: UserNotifyType, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    user_allow_pm: { phpName: UserAllowPm, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    user_allow_viewonline: { phpName: UserAllowViewonline, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    user_allow_viewemail: { phpName: UserAllowViewemail, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    user_allow_massemail: { phpName: UserAllowMassemail, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    user_options: { phpName: UserOptions, type: INTEGER, size: '11', required: true, defaultValue: '230271' }
+    user_avatar: { phpName: UserAvatar, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    user_avatar_type: { phpName: UserAvatarType, type: TINYINT, size: '2', required: true, defaultValue: '0' }
+    user_avatar_width: { phpName: UserAvatarWidth, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    user_avatar_height: { phpName: UserAvatarHeight, type: SMALLINT, size: '4', required: true, defaultValue: '0' }
+    user_sig: { phpName: UserSig, type: LONGVARCHAR, required: true }
+    user_sig_bbcode_uid: { phpName: UserSigBbcodeUid, type: VARCHAR, size: '8', required: true, defaultValue: '' }
+    user_sig_bbcode_bitfield: { phpName: UserSigBbcodeBitfield, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    user_from: { phpName: UserFrom, type: VARCHAR, size: '100', required: true, defaultValue: '' }
+    user_icq: { phpName: UserIcq, type: VARCHAR, size: '15', required: true, defaultValue: '' }
+    user_aim: { phpName: UserAim, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    user_yim: { phpName: UserYim, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    user_msnm: { phpName: UserMsnm, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    user_jabber: { phpName: UserJabber, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    user_website: { phpName: UserWebsite, type: VARCHAR, size: '200', required: true, defaultValue: '' }
+    user_occ: { phpName: UserOcc, type: LONGVARCHAR, required: true }
+    user_interests: { phpName: UserInterests, type: LONGVARCHAR, required: true }
+    user_actkey: { phpName: UserActkey, type: VARCHAR, size: '32', required: true, defaultValue: '' }
+    user_newpasswd: { phpName: UserNewpasswd, type: VARCHAR, size: '40', required: true, defaultValue: '' }
+    user_form_salt: { phpName: UserFormSalt, type: VARCHAR, size: '32', required: true, defaultValue: '' }
+    user_new: { phpName: UserNew, type: TINYINT, size: '1', required: true, defaultValue: '1' }
+    user_reminded: { phpName: UserReminded, type: TINYINT, size: '4', required: true, defaultValue: '0' }
+    user_reminded_time: { phpName: UserRemindedTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+    _indexes: { user_birthday: [user_birthday], user_email_hash: [user_email_hash], user_type: [user_type] }
+    _uniques: { username_clean: [username_clean] }
+  phpbb_warnings:
+    _attributes: { phpName: PhpbbWarnings }
+    warning_id: { phpName: WarningId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    post_id: { phpName: PostId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    log_id: { phpName: LogId, type: SMALLINT, size: '8', required: true, defaultValue: '0' }
+    warning_time: { phpName: WarningTime, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+  phpbb_words:
+    _attributes: { phpName: PhpbbWords }
+    word_id: { phpName: WordId, type: SMALLINT, size: '8', primaryKey: true, autoIncrement: true, required: true }
+    word: { phpName: Word, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    replacement: { phpName: Replacement, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+  phpbb_zebra:
+    _attributes: { phpName: PhpbbZebra }
+    user_id: { phpName: UserId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    zebra_id: { phpName: ZebraId, type: SMALLINT, size: '8', primaryKey: true, required: true, defaultValue: '0' }
+    friend: { phpName: Friend, type: TINYINT, size: '1', required: true, defaultValue: '0' }
+    foe: { phpName: Foe, type: TINYINT, size: '1', required: true, defaultValue: '0' }

@@ -1,0 +1,182 @@
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td {
+  margin:0;
+  padding:0;
+}
+html, body {
+  width:100%;
+  height:100%
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+  color: #333;
+  margin: 0px;
+  padding: 0px;
+}
+#distance {
+  float: left;
+  height: 50%;
+  width: 100%;
+  margin-top: -182px;
+}
+
+#container {
+  clear:left;
+  height:264px;
+  position:relative;
+  width:433px;
+  display: block;
+  margin-top: 0;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: auto;
+}
+.all_content {
+  height: 264px;
+  width: 100%;
+  clear: left;
+  float: left;
+  background-image: url(/images/bg_login.png);
+
+}
+.login_holder {
+  float: left;
+  width: 370px;
+  padding-left:50px;
+  position: absolute;
+  top: 85px;
+
+  clear: left;
+}
+.login_holder ul {
+  padding: 0;
+  width: 100%;
+  margin: 0;
+  list-style: none;
+
+}
+.login_holder_list {
+  float: left;
+
+}
+.login_holder ul li {
+  float: left;
+  clear: left;
+  width:340px;
+  font-weight: bold;
+  list-style: none;
+}
+
+.login_holder label {
+  width: auto;
+  color: #555;
+  padding-left: 5px;
+  font-size: 0.85em;
+  float: left;
+}
+#signin_remember {
+  float: left;
+}
+.all_content  ul.error_list {
+  float: left;
+  width: 345px;
+  color: #b10a0a;
+  font-size: 0.85em;
+  line-height: 20px;
+  height: auto;
+  margin-top: 60px;
+  padding-right: 35px;
+  padding-bottom: 5px;
+  list-style: none;
+  text-align: right;
+  font-weight: bold;
+  border: none;
+
+}
+.login_holder ul.error_list {
+  float: left;
+  width: auto;
+  color: #b10a0a;
+  font-size: 0.85em;
+  line-height: 20px;
+  height: auto;
+  padding-top: 10px;
+  padding-right: 25px;
+  margin-top: 0;
+}
+.login_holder ul.error_list li {
+  width: auto;
+  padding-left: 5px;
+}
+.btn_login_holder {
+  float:left;
+  width: auto;
+  padding-top: 20px;
+  padding-left: 230px;
+}
+.btn_frogPass {
+  float: left;
+  width: auto;
+  display: inline;
+  margin-left: 20px;
+}
+.remember_holder {
+  float: left;
+  width: auto;
+
+}
+.btn_frogPass a:link, .btn_frogPass a:active, .btn_frogPass a:visited {
+  color: #999;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.85em;
+}
+.btn_frogPass a:hover{
+  color: #555;
+}
+#signin_username,
+#signin_password {
+  width: 180px;
+  border: 1px #999 solid;
+  float: left;
+  padding: 1px 5px;
+  margin-top: 10px;
+}
+
+/*filter css*/
+#sf_admin_bar {
+  position: absolute;
+  right: 10px;
+  top: 145px;
+  width: 320px;
+}
+.sf_admin_filter {
+ 
+}
+.sf_admin_filter table {
+  width: 100%;
+}
+.sf_admin_filter table thead {
+  line-height: 20px;
+}
+.sf_admin_filter input, .sf_admin_filter select {
+  padding: 0;
+}
+.sf_admin_filter #sf_admin_container tr {
+  background-color: #555;
+}
+.sf_admin_filter #sf_admin_container th {
+  background-color: #444;
+}
+.sf_admin_filter  #sf_admin_container label {
+  color: #fff;
+}
+.sf_admin_filter input, .sf_admin_filter select {
+  padding: 0 !important;
+}
+.sf_admin_list th, #sf_admin_bar th {
+  line-height: 20px;
+}
+.sf_admin_list td, .sf_admin_list th, #sf_admin_bar td, #sf_admin_bar th {
+  padding:7px 5px;;
+}

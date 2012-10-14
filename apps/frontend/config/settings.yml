@@ -1,0 +1,46 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/04-Settings
+
+prod:
+  .settings:
+    no_script_name:         true
+    logging_enabled:        false
+
+dev:
+  .settings:
+    error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
+    web_debug:              true
+    cache:                  false
+    no_script_name:         false
+    etag:                   false
+
+test:
+  .settings:
+    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
+    cache:                  false
+    web_debug:              false
+    no_script_name:         false
+    etag:                   false
+
+all:
+  .settings:
+    # Form security secret (CSRF protection)
+    csrf_secret:            837fecc7bc6e82a071545b3766d85925fc64cac4
+
+    # Output escaping settings
+    escaping_strategy:      true
+    escaping_method:        ESC_SPECIALCHARS
+
+    # Enable the database manager
+    use_database:           true
+
+    enabled_modules:        [sfGuardAuth, cre8FlashSlider2, captcha, cre8ForgottenPassword, datepicker, cre8news, cre8SwfObject, cre8MailingList, sfFacebookConnectAuth, sfFacebookConnectDemo, cre8Form, cre8Ajax, cre8Email]
+
+    login_module:           sfGuardAuth
+    login_action:           signin
+
+    secure_module:          sfGuardAuth
+    secure_action:          secure
+
+    error_404_module:       content   # To be called when a 404 error is raised
+    error_404_action:       error404  # Or when the requested URL doesn't match any route

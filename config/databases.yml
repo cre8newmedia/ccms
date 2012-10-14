@@ -1,0 +1,28 @@
+dev:
+  propel:
+    class: sfPropelDatabase
+    param:
+      classname: DebugPDO
+      dsn: 'mysql:host=localhost;dbname=ccms_dev'
+test:
+  propel:
+    class: sfPropelDatabase
+    param:
+      classname: DebugPDO
+      dsn: 'mysql:host=localhost;dbname=ccms_test'
+all:
+  propel:
+    class: sfPropelDatabase
+    param:
+      classname: PropelPDO
+      dsn: 'mysql:host=localhost;dbname=ccms_dev'
+      username: DB_USERNAME_CHANGE_IT
+      password: DB_PASSWORD_CHANGE_IT
+      encoding: utf8
+      persistent: true
+      pooling: true
+prod:
+  propel:
+    class: sfPropelDatabase
+    param:
+      dsn: 'mysql:host=localhost;dbname=ccms_prod'

@@ -1,0 +1,13 @@
+INSTALATION:
+
+  edit:  my_app/config/settings.yml
+  add:   cre8SwfObject to enabled_modules:
+  
+    enabled_modules:        [cre8SwfObject]
+  
+HOW TO USE:
+  
+  in template:
+  
+    <?php include_partial('cre8SwfObject/embedSWF', array('filepath' => 'path_to_my_swf_flash_file', 'id' => 'DIV_ID_and_OBJECT_NAME', 'width' => 640, 'height' => 480)); ?>
+  

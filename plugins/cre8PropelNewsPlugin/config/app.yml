@@ -1,0 +1,6 @@
+all:
+  
+  cre8_news:
+    use_categories:     true
+    manage_categories:  true
+  

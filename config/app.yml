@@ -1,0 +1,38 @@
+all:
+
+  company_name:         MY COMPANY
+  company_email:        'info@domain.com'
+  from_email:           'me@domain.com'
+
+  pager_navigation:
+    first:   '/images/arrows/first.png'
+    prev:    '/images/arrows/previous.png'
+    next:    '/images/arrows/next.png'
+    last:    '/images/arrows/last.png'
+
+  sf_guard_plugin:
+    profile_class:      sfGuardUserProfile
+    signin_form:        LoginForm
+
+  prestaForumConnector:
+    userConnector:
+      class:  prestaSfGuardPropelConnector  # the name of the connector to use (here we use sfGuardPropel as user management tools)
+      param:
+        getUsernameMethod:  getUsername # define here the name of the sfGuardUser's method to use for retrieving the username
+        getEmailMethod:     getUsername    # define here the name of the sfGuardUser's method to use for retrieving the email. Can be getUsername if the username is the email. If needed create yourself this method if the email is stored in another table like the profile table.
+        getCultureMethod:   getCulture  # define here the name of the sfGuardUser's method to use for retrieving the user's preferred culture. If needed create yourself this method if the culture is stored in another table like the profile table or if it is a constant.
+
+    forumConnector:
+      class:  prestaPhpBB3Connector  # the name of the connector to use (here we use phpBB3 as forum platform tools)
+      # param:
+        # for the required parameters see the help related to the connector that you're using
+
+    forumWebDir:             <?php echo sfConfig::get('sf_web_dir');?>/forum/ # path to the forum directory
+
+    forumDatabaseId:        default  # the identifier of the database connection to use for the forum solution as defined in database.yml
+
+prod:
+
+  company_name:         MY COMPANY
+  company_email:        'info@domain.com'
+  from_email:           'me@domain.com'

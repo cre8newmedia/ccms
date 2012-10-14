@@ -1,0 +1,98 @@
+cre8News plugin
+==============
+
+The 'cre8NewsPlugin' is a symfony plugin that provides easily 
+integration of news section on in any symfony project which is based on Propel ORM.
+
+Installation
+------------
+  * Make sure you have installed required plugins this one is using:
+    
+    * sfDatePlugin (optional) - required if you going to use partial: newsByMonth
+    
+  * Install the plugin using SVN:
+    
+      https://www.cre8newmedia.com/svn/cre8/projects/plugins/symfony/cre8NewsPlugin/trunk
+  
+  * Rebuild your model
+
+        $ symfony propel:build-model
+        $ symfony propel:build-sql
+        $ symfony propel:build-forms
+        $ symfony propel:build-filters
+
+  * Update your database tables by starting from scratch (it will delete all
+    the existing tables, then re-create them):
+
+        $ symfony propel:insert-sql
+
+    or you can just create the new tables by using the generated SQL
+    statements in `data/sql/plugins.cre8NewsPlugin.lib.model.schema.sql`
+  
+  * Enable one or more modules in your `settings.yml` (optional)
+    * For your backend application:  cre8NewsAdmin
+    * For your frontend application: cre8news
+
+            [php]
+            all:
+              .settings:
+                enabled_modules:      [default, cre8news]
+
+  * Clear you cache
+
+        $ symfony cc
+
+  * For administration module type: http://my_admin_app/news
+  
+  * For frontend application:
+  
+    *  Create new action to display list of news and use code like that:
+       
+            [php]
+            c = Cre8NewsPeer::getActiveNewsCriteria();
+		    if($request->hasParameter('date') && $request->getParameter('date') != 'all') {
+		    	if($timestamp = sfDateTimeToolkit::getTS($request->getParameter('date') . '-01')) {
+		    		try {
+		    			$sfDate = new sfDate($timestamp);
+		    			$c = Cre8NewsPeer::getBetweenDisplayDatesCriteria($sfDate->format_database(), $sfDate->finalDayOfMonth()->format_database(), $c);
+		    		} catch (Exception $e) {
+		    			
+		    		}
+		    		
+		    	}
+		    }
+		  	$pager = new sfPropelPager('Cre8News', 20);
+		    $pager->setCriteria($c);
+		    $pager->setPage($this->getRequestParameter('page', 1));
+		    $pager->init();
+		    $this->pager = $pager;
+  
+  * News By Month (optional) - requires sfDatePlugin to be installed
+    
+    Basically add logic to your layout/template which gonna display (or not) content:
+    Example:
+      
+      apps/frontend/templates/layout.php:
+            
+            [php]
+            
+            <?php include_partial('cre8news/newsByMonth'); ?>
+            
+            [/php]
+      
+          another example (using slot as logic):
+      
+            [php]
+            <?php if(has_slot('newsByMonth')): ?>
+      			<?php include_partial('cre8news/newsByMonth'); ?>
+      		<?php endif; ?>
+      		[/php]
+      		
+      		To display it you need to set slot in your template like that:
+      		
+      		apps/frontend/your_module/templates/your_template.php:
+      		
+      		[php]
+      		<?php slot('newsByMonth', true); ?>
+      		[/php]
+  

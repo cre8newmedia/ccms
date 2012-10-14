@@ -1,0 +1,11 @@
+connection:           propel
+defaultIdMethod:      native
+package:              plugins.cre8PropelMailingListPlugin.lib.model
+
+classes:
+
+  cre8MailingList:
+    columns:
+      id:             ~
+      email:          { type: varchar(128), required: true, index: unique }
+  

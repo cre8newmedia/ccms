@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xml>
+
+<settings 
+
+width	       	= "590"
+height         	= "300"
+buttonPos	= "bottom-left"
+showNav		= "true"
+
+showNumber	   = "true" 
+btnNumberBgColor   = "0xFFFFFF"
+bntNumberForeColor = "0x000000"
+
+showArrow	  = "true"
+btnArrowBgColor   = "0xFFFFFF"
+bntArrowForeColor = "0x000000"
+
+showPause	  = "true"
+btnPauseBgColor   = "0x999999"
+bntPauseForeColor = "0xFFFFFF"
+
+btnSpace	= "2"
+>
+	
+</settings>
+
+<images>	
+
+	<image>
+		<file>images/image1.jpg</file>	
+		<text width="240" xpos="40" ypos="70" bgAlpha="40" bgColor="0x000000"><![CDATA[<font color="#FFFFFF">This is banner rotator with full xml configuration. Here is the text. You can set width and position for each text from XML! Also support html formatted. This is sample <a href="http://flashden.net/user/devita">hyperlink. </a>You can put text anywhere!</font>]]></text>
+		<url>http://www.flashden.net/devita</url>
+		<window>_blank</window>
+		<timer>5</timer>
+	</image>
+
+	<image>
+		<file>images/image2.jpg</file>			
+		<text width="530" xpos="20" ypos="20" bgAlpha="30" bgColor="0x000000"><![CDATA[<a href="http://flashden.net/user/devita">You can set different text size and position for each banner. </a><font color="#FFFFFF">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequat.</font>]]></text>
+		<url>http://flashden.net/user/devita</url>
+		<window>_blank</window>
+		<timer>5</timer>
+	</image>
+
+	<image>
+		<file>images/image3.jpg</file>
+		<text width="220" xpos="320" ypos="40" bgAlpha="0" bgColor="0x000000"><![CDATA[<font color="#FFFFFF" size="18px">This is sample text without background. You can set background opacity from XML. That's easy!<br><br></font>- Developed by Devita -]]></text>
+		<url>http://flashden.net/user/devita</url>
+		<window>_blank</window>
+		<timer>5</timer>
+	</image>
+
+	<image>
+		<file>images/image4.jpg</file>		
+		<text width="240" xpos="30" ypos="30" bgAlpha="80" bgColor="0xFFD220"><![CDATA[<font color="#333333" size="14"> You can set different text background color for each banner</font><br><font color="#333333"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequat.</font>]]></text> 
+		<url>http://flashden.net/user/devita</url>
+		<window>_blank</window>
+		<timer>5</timer>
+	</image>
+
+	<image>
+		<file>images/image5.jpg</file>		
+		<text width="490" xpos="40" ypos="80" bgAlpha="70" bgColor="0xFFFFFF"><![CDATA[<font color="#333333" size="16px">This is sample banner with bigger text, you can set this from xml. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequat.</font>]]></text>
+		<url>http://flashden.net/user/devita</url>
+		<window>_blank</window>
+		<timer>5</timer>
+	</image>
+
+<image>
+		<file>images/sample.swf</file>	
+		<text width="" xpos="" ypos=""></text>
+		<url>http://flashden.net/user/devita</url>
+		<window>_blank</window>
+		<timer>5</timer>
+	</image>
+
+
+</images>
+</xml>

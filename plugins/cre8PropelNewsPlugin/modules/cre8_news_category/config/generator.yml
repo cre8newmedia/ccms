@@ -1,0 +1,25 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           Cre8NewsCategory
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          cre8_news_category
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title:       News Categories
+        display:     [=name]
+      filter:
+        display:     [name]
+      form:    ~
+      edit:
+        title:       Editing news category "%%name%%"
+      new:
+        title:       New News Category

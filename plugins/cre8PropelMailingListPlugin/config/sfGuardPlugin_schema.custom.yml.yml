@@ -1,0 +1,6 @@
+classes:
+
+  sfGuardUser:
+    columns:
+      has_mailing_subscribtion:  { type: boolean, required: true, default: 0 }
+      

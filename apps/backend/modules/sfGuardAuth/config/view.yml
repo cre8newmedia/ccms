@@ -1,0 +1,4 @@
+signinSuccess:
+  stylesheets:    [-*, main]
+  javascripts:    [-*]
+  layout:         login

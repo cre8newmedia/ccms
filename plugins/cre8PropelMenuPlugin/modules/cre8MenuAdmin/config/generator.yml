@@ -1,0 +1,24 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           Cre8MenuContent
+    theme:                 admin15
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          cre8_menu_content
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        display:           [=name, is_active, is_hidden]
+        title:             Pages List
+      filter:  ~
+      form:    ~
+      edit:
+        title:             Editing "%%name%%" page
+      new:
+        title:             Create new page

@@ -1,0 +1,5 @@
+svnSettings:
+  workingCopyPath:  <?php echo sfConfig::get('sf_root_dir') ?>
+  logPath:          <?php echo sfConfig::get('sf_log_dir') ?>
+  username:         USERNAME_CHANGE_IT
+  password:         PASSWORD_CHANGE_IT

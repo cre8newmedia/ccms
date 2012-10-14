@@ -1,0 +1,19 @@
+news:
+  url:   /news
+  param: { module: content, action: news }
+
+newsDetails:
+  url:   /news-details/:slug
+  param: { module: content, action: newsDetails }
+  class:   sfPropelRoute
+  options: { model: Cre8News, type: object }
+  requirements:
+    sf_method: [get, post]
+
+facebook_demo:
+  url:   /facebook-demo
+  param: { module: sfFacebookConnectDemo, action: index }
+
+homepage:
+  url:   /:slug
+  param: { module: content, action: index, slug: home }

@@ -1,0 +1,16 @@
+all:
+  cre8_flash_slider2:
+    width:                618
+    height:               352
+    buttonPos:            'center-left'
+    showNav:              'true'
+    showNumber:           'true'
+    btnNumberBgColor:     '0xFFFFFF'
+    bntNumberForeColor:   '0x000000'
+    showArrow:            'true'
+    btnArrowBgColor:      '0xFFFFFF'
+    bntArrowForeColor:    '0x000000'
+    showPause:            'true'
+    btnPauseBgColor:      '0x999999'
+    bntPauseForeColor:    '0xFFFFFF'
+    btnSpace:             2

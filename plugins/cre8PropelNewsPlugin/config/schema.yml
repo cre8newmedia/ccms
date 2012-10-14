@@ -1,0 +1,35 @@
+connection:           propel
+defaultIdMethod:      native
+package:              plugins.cre8PropelNewsPlugin.lib.model
+
+classes:
+  
+  Cre8News:
+    propel_behaviors:
+      sluggable:
+        slug_pattern:   '{Title}'
+    columns:
+      id:           ~
+      title:        { type: varchar(80), required: true }
+      summary:      { type: longvarchar }
+      content:      { type: longvarchar }
+      display_date: { type: timestamp }
+      is_active:    { type: boolean, default: 1 }
+  
+  Cre8NewsCategory:
+    propel_behaviors:
+      sluggable:
+        slug_pattern:   '{Name}'
+    columns:
+      id:           ~
+      name:         { type: varchar(128), required: true }
+      
+  Cre8NewsCre8NewsCategory:
+    propel_behaviors:
+      symfony:
+        form:   false
+        filter: false
+    columns:
+      cre8_news_id:           { type: integer, required: true, foreignClass: Cre8News, foreignReference: id, onDelete: cascade, primaryKey: true }
+      cre8_news_category_id:  { type: integer, required: true, foreignClass: Cre8NewsCategory, foreignReference: id, onDelete: cascade, primaryKey: true }
+  

@@ -1,0 +1,1 @@
+<?php echo link_to('Manage News', url_for('@cre8_news')); ?>

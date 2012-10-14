@@ -1,0 +1,68 @@
+connection:           propel
+defaultIdMethod:      native
+package:              plugins.cre8PhpMailerNewsletterPlugin.lib.model
+
+classes:
+  
+  PhpmlLists:
+    propel_behaviors:
+      symfony:
+        form:   false
+        filter: false
+    columns:
+      listid:      { phpName: Listid,      type: INTEGER, size: '8',   primaryKey: true, autoIncrement: true, required: true }
+      listowner:   { phpName: Listowner,   type: VARCHAR, size: '255', required: true, defaultValue: '' }
+      listemail:   { phpName: Listemail,   type: VARCHAR, size: '255', required: true, defaultValue: '' }
+      title:       { phpName: Title,       type: VARCHAR, size: '255', required: false }
+      description: { phpName: Description, type: VARCHAR, size: '255', required: false }
+      display:     { phpName: Display,     type: CHAR, required: true, defaultValue: '1' }
+
+  PhpmlMembers:
+    propel_behaviors:
+      symfony:
+        form:   false
+        filter: false
+    columns:
+      memberid:    { phpName: Memberid, type: INTEGER, size: '8', primaryKey: true, autoIncrement: true, required: true }
+      listid:      { phpName: Listid, type: INTEGER, size: '8', required: true, defaultValue: '1' }
+      firstname:   { phpName: Firstname, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+      lastname:    { phpName: Lastname, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+      city:        { phpName: City, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+      state:       { phpName: State, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+      country:     { phpName: Country, type: CHAR, size: '3', required: true, defaultValue: '' }
+      message:     { phpName: Message, type: VARCHAR, required: true }
+      email:       { phpName: Email, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+      regdate:     { phpName: Regdate, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+      confirmed:   { phpName: Confirmed, type: CHAR, required: true, defaultValue: '0' }
+      approved:    { phpName: Approved, type: CHAR, required: true, defaultValue: '0' }
+      deleted:     { phpName: Deleted, type: CHAR, required: true, defaultValue: '0' }
+      deldate:     { phpName: Deldate, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+      IP:          { phpName: Ip, type: VARCHAR, size: '31', required: true, defaultValue: '' }
+      RH:          { phpName: Rh, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+
+  PhpmlMsgs:
+    propel_behaviors:
+      symfony:
+        form:   false
+        filter: false
+    columns:
+      msgid:       { phpName: Msgid, type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+      subject:     { phpName: Subject, type: VARCHAR, size: '255', required: true, defaultValue: '' }
+      body:        { phpName: Body, type: CLOB, required: true }
+      format:      { phpName: Format, type: CHAR, required: true, defaultValue: H }
+      sent:        { phpName: Sent, type: INTEGER, size: '11', required: true, defaultValue: '0' }
+      numsent:     { phpName: Numsent, type: INTEGER, size: '8', required: true, defaultValue: '0' }
+      modified:    { phpName: Modified, type: TIMESTAMP, required: true, defaultExpr: CURRENT_TIMESTAMP }
+      listid:      { phpName: Listid, type: INTEGER, size: '8', required: true, defaultValue: '1' }
+
+  PhpmlTrack:
+    propel_behaviors:
+      symfony:
+        form:   false
+        filter: false
+    columns:
+      trackid:     { phpName: Trackid, type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+      eid:         { phpName: Eid, type: VARCHAR, size: '64', required: true, defaultValue: '' }
+      mid:         { phpName: Mid, type: VARCHAR, size: '64', required: true, defaultValue: '' }
+      ipaddr:      { phpName: Ipaddr, type: VARCHAR, size: '16', required: true, defaultValue: '' }
+      atime:       { phpName: Atime, type: TIMESTAMP, required: true, defaultExpr: CURRENT_TIMESTAMP }

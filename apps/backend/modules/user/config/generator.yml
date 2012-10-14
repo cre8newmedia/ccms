@@ -1,0 +1,32 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           sfGuardUser
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              sfGuardUser
+    plural:                sfGuardUsers
+    route_prefix:          sf_guard_user
+    with_propel_route:     1
+    actions_base_class:    sfActions
+    css:                   nothing   #setting the css to a placeholder
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        display:     [=username, created_at, last_login, is_active]
+        sort:        [created_at, desc]
+        max_per_page:  10000
+        batch_actions:
+          _delete:   ~
+#          exportToMailingList:    { label: Export to Mailing List }
+        peer_method:  doSelectBasedOnPrivilageGroup
+        peer_count_method: doCountBasedOnPrivilageGroup
+      filter:
+        class:       AdminsfGuardUserFormFilter
+      form:
+        class:       AdminUserForm
+      edit:    ~
+      new:     ~

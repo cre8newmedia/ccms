@@ -1,0 +1,17 @@
+connection:           propel
+defaultIdMethod:      native
+package:              lib.model
+
+classes:
+
+  sfGuardUserProfile:
+    columns:
+      id:              ~
+      user_id:         { type: integer, foreignClass: sfGuardUser, foreignReference: id, required: true, onDelete: cascade }
+      first_name:      { type: varchar(20), required: true }
+      last_name:       { type: varchar(20), required: true }
+      facebook_uid:    { type: varchar, size: 20, index: unique }
+      email:           { type: varchar, size: 255, index: unique }
+      email_hash:      { type: varchar, size: 255, index: unique }
+
+  

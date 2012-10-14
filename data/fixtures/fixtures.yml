@@ -1,0 +1,82 @@
+sfGuardPermission:
+  sfGuardPermission_1:
+    name: admin
+    description: 'Administrator permission'
+  sfGuardPermission_2:
+    name: moderator
+    description: 'Moderation permission'
+  sfGuardPermission_3:
+    name: publisher
+    description: 'Publishing permission'
+  sfGuardPermission_4:
+    name: user
+    description: 'User permission'
+
+sfGuardGroup:
+  sfGuardGroup_1:
+    name: admin
+    description: 'Administrator group'
+  sfGuardGroup_2:
+    name: moderator
+    description: 'Moderator group'
+  sfGuardGroup_3:
+    name: publisher
+    description: 'Publisher group'
+  sfGuardGroup_4:
+    name: user
+    description: 'User group'
+
+sfGuardGroupPermission:
+  sfGuardGroupPermission_1_1:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_1
+  sfGuardGroupPermission_1_2:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_2
+  sfGuardGroupPermission_1_3:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_3
+  sfGuardGroupPermission_1_4:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_4
+
+  sfGuardGroupPermission_2_2:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_2
+  sfGuardGroupPermission_2_3:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_3
+  sfGuardGroupPermission_2_4:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_4
+
+  sfGuardGroupPermission_3_3:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_3
+  sfGuardGroupPermission_3_4:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_4
+
+  sfGuardGroupPermission_4_4:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_4
+  
+
+sfGuardUser:
+  sfGuardUser_1:
+    username: admin
+    password: password
+    is_active: '1'
+    is_super_admin: '1'
+
+sfGuardUserGroup:
+  sfGuardUserGroup_1_1:
+    user_id: sfGuardUser_1
+    group_id: sfGuardGroup_1
+
+sfGuardUserProfile:
+  sfGuardUserProfile_1:
+    user_id: sfGuardUser_1
+    email:   user@domain.com
+    first_name: John
+    last_name:  Bravo
